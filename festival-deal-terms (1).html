@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Festival Deal Terms — Palm Tree Crew</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0c;
+    --surface: #161614;
+    --surface2: #1e1e1b;
+    --border: #2a2a26;
+    --border2: #353530;
+    --gold: #c9a84c;
+    --gold-dim: #8a6f30;
+    --text: #e8e4d8;
+    --text-dim: #7a7668;
+    --text-mid: #a8a494;
+    --green: #4a9c6e;
+    --red: #c05a4a;
+    --blue: #4a7ec0;
+    --radius: 4px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+  }
+  .divider-v {
+    width: 1px;
+    height: 20px;
+    background: var(--border2);
+  }
+  .topbar-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .save-indicator {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .save-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--text-dim);
+  }
+  .save-dot.saved { background: var(--green); }
+
+  /* LAYOUT */
+  .layout {
+    display: flex;
+    min-height: calc(100vh - 56px);
+  }
+
+  /* SIDEBAR NAV */
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 32px 0;
+    position: sticky;
+    top: 56px;
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+  }
+  .nav-section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 0 24px;
+    margin-bottom: 8px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 24px;
+    cursor: pointer;
+    color: var(--text-mid);
+    font-size: 13px;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+    text-decoration: none;
+  }
+  .nav-item:hover { color: var(--text); background: var(--surface2); }
+  .nav-item.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background: rgba(201,168,76,0.06);
+  }
+  .nav-item .nav-icon { font-size: 14px; opacity: 0.8; }
+  .nav-item .nav-status {
+    margin-left: auto;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border2);
+  }
+  .nav-item .nav-status.done { background: var(--green); }
+  .nav-item .nav-status.partial { background: var(--gold); }
+  .nav-spacer { height: 20px; }
+
+  /* MAIN CONTENT */
+  .main {
+    flex: 1;
+    padding: 48px 56px;
+    max-width: 860px;
+  }
+
+  /* SECTION */
+  .form-section {
+    display: none;
+  }
+  .form-section.active { display: block; }
+
+  .section-header {
+    margin-bottom: 36px;
+  }
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .section-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* FIELDSET */
+  .fieldset {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .fieldset-header {
+    padding: 14px 20px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .fieldset-icon { font-size: 14px; }
+  .fieldset-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+  }
+  .fieldset-body { padding: 20px; }
+
+  /* FORM GRID */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .form-grid.cols-1 { grid-template-columns: 1fr; }
+  .form-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .col-span-2 { grid-column: span 2; }
+
+  /* FIELD */
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-mid);
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .field-label .req { color: var(--gold); font-size: 10px; }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  select,
+  textarea {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color 0.15s;
+    width: 100%;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--gold-dim);
+  }
+  input::placeholder, textarea::placeholder { color: var(--text-dim); }
+  select option { background: var(--surface2); }
+  textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+
+  /* MONEY INPUT */
+  .money-wrap {
+    position: relative;
+  }
+  .money-wrap input { padding-left: 28px; }
+  .money-symbol {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    font-size: 12px;
+    pointer-events: none;
+  }
+
+  /* PERCENT INPUT */
+  .pct-wrap { position: relative; }
+  .pct-wrap input { padding-right: 28px; }
+  .pct-symbol {
+    position: absolute;
+    right: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    font-size: 12px;
+    pointer-events: none;
+  }
+
+  /* REPEATING ITEMS */
+  .repeat-list { display: flex; flex-direction: column; gap: 12px; }
+  .repeat-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    position: relative;
+  }
+  .repeat-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .repeat-item-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .btn-remove {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 2px 6px;
+    border-radius: var(--radius);
+    transition: all 0.15s;
+    line-height: 1;
+  }
+  .btn-remove:hover { color: var(--red); background: rgba(192,90,74,0.1); }
+
+  .btn-add {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: 1px dashed var(--border2);
+    color: var(--text-dim);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.15s;
+    margin-top: 8px;
+  }
+  .btn-add:hover { border-color: var(--gold-dim); color: var(--gold); }
+  .btn-add-icon { font-size: 16px; line-height: 1; }
+
+  /* BOTTOM NAV */
+  .section-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: none;
+  }
+  .btn-ghost {
+    background: none;
+    color: var(--text-dim);
+    border: 1px solid var(--border2);
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--border2); background: var(--surface2); }
+  .btn-primary {
+    background: var(--gold);
+    color: #0e0e0c;
+    font-weight: 600;
+  }
+  .btn-primary:hover { background: #d4b45a; }
+  .btn-primary:disabled { background: var(--gold-dim); cursor: not-allowed; opacity: 0.6; }
+  .btn-submit {
+    background: var(--green);
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 28px;
+    font-size: 14px;
+  }
+  .btn-submit:hover { background: #5aad7e; }
+  .btn-submit:disabled { background: #2a5a3e; cursor: not-allowed; }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    height: 2px;
+    background: var(--border);
+    position: fixed;
+    top: 55px;
+    left: 0;
+    right: 0;
+    z-index: 101;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  /* TOAST */
+  .toast-container {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .toast {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 260px;
+    animation: slideIn 0.2s ease;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .toast.success { border-left: 3px solid var(--green); }
+  .toast.error { border-left: 3px solid var(--red); }
+  .toast.info { border-left: 3px solid var(--blue); }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* SUBMIT SCREEN */
+  .submit-screen {
+    display: none;
+    text-align: center;
+    padding: 80px 40px;
+  }
+  .submit-screen.active { display: block; }
+  .submit-icon { font-size: 48px; margin-bottom: 24px; }
+  .submit-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    margin-bottom: 12px;
+    color: var(--gold);
+  }
+  .submit-desc { color: var(--text-dim); line-height: 1.6; margin-bottom: 32px; }
+  .task-links { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+  .task-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 13px;
+    transition: border-color 0.15s;
+  }
+  .task-link:hover { border-color: var(--gold-dim); }
+  .task-link-icon { font-size: 16px; }
+  .task-link-url { margin-left: auto; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gold-dim); }
+
+  /* API KEY BANNER */
+  .api-banner {
+    background: rgba(201,168,76,0.08);
+    border: 1px solid var(--gold-dim);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .api-banner-icon { font-size: 16px; padding-top: 1px; }
+  .api-banner-text { font-size: 12px; color: var(--text-mid); line-height: 1.6; }
+  .api-banner-text strong { color: var(--gold); }
+  .api-key-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .api-key-input {
+    flex: 1;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+  .btn-sm {
+    padding: 7px 14px;
+    font-size: 12px;
+    background: var(--gold);
+    color: #0e0e0c;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .btn-sm:hover { background: #d4b45a; }
+
+  /* INLINE ALERT */
+  .inline-alert {
+    background: rgba(74,156,110,0.1);
+    border: 1px solid rgba(74,156,110,0.3);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  /* SALES TAX TABLE */
+  .tax-table { width: 100%; border-collapse: collapse; }
+  .tax-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .tax-table td { padding: 6px 10px; }
+  .tax-table tr:not(:last-child) td { border-bottom: 1px solid var(--border); }
+  .tax-table input, .tax-table select {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 24px 20px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .col-span-2 { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:20%"></div></div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="logo">PTC</span>
+    <div class="divider-v"></div>
+    <span class="topbar-title">Festival Deal Terms</span>
+  </div>
+  <div class="save-indicator">
+    <div class="save-dot" id="saveDot"></div>
+    <span id="saveText">Draft</span>
+    <div style="width:1px;height:16px;background:var(--border2);margin:0 8px"></div>
+    <button class="btn-sm" onclick="toggleLoadMode()" style="background:var(--surface2);color:var(--text-mid);border:1px solid var(--border2);font-size:11px;padding:4px 10px;">✏️ Load & Edit</button>
+  </div>
+</div>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="nav-section-label">Sections</div>
+    <a class="nav-item active" onclick="goTo(0)" id="nav0">
+      <span class="nav-icon">🎪</span> Event & Deal Terms
+      <span class="nav-status" id="status0"></span>
+    </a>
+    <a class="nav-item" onclick="goTo(1)" id="nav1">
+      <span class="nav-icon">💸</span> Expenses
+      <span class="nav-status" id="status1"></span>
+    </a>
+    <a class="nav-item" onclick="goTo(2)" id="nav2">
+      <span class="nav-icon">💰</span> Revenue Sources
+      <span class="nav-status" id="status2"></span>
+    </a>
+    <a class="nav-item" onclick="goTo(3)" id="nav3">
+      <span class="nav-icon">🧾</span> Sales Tax & Notes
+      <span class="nav-status" id="status3"></span>
+    </a>
+    <div class="nav-spacer"></div>
+    <div class="nav-section-label">Actions</div>
+    <a class="nav-item" onclick="submitAll()" id="nav-submit">
+      <span class="nav-icon">🚀</span> Submit to ClickUp
+    </a>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- API KEY BANNER -->
+    <div class="api-banner" id="apiBanner">
+      <span class="api-banner-icon">🔑</span>
+      <div class="api-banner-text">
+        <strong>ClickUp API Key required</strong> — this form submits directly to your ClickUp workspace. Enter your personal API token below. It's stored only in your browser session.
+        <div class="api-key-row">
+          <input type="password" class="api-key-input" id="apiKeyInput" placeholder="pk_xxxxxxxxxxxxxxxx" />
+          <button class="btn-sm" onclick="saveApiKey()">Save</button>
+        </div>
+        <div id="apiKeyConfirm"></div>
+      </div>
+    </div>
+
+    <!-- LOAD & EDIT PANEL -->
+    <div id="loadEditPanel" style="display:none;background:rgba(74,126,192,0.07);border:1px solid rgba(74,126,192,0.25);border-radius:var(--radius);padding:14px 16px;margin-bottom:24px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;">✏️ Load Existing Task to Edit</div>
+      <div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;">Paste a ClickUp task ID to load its current data back into the form. On submit, the task will be updated rather than a new one created.</div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input type="text" id="loadTaskId" placeholder="e.g. 86b93bgmc" style="flex:1;font-family:'DM Mono',monospace;font-size:12px;padding:7px 10px;" />
+        <button class="btn-sm" onclick="loadTask()" id="loadBtn">Load Task</button>
+        <button class="btn-sm" onclick="toggleLoadMode()" style="background:var(--surface2);color:var(--text-dim);border:1px solid var(--border2);">Cancel</button>
+      </div>
+      <div id="loadStatus" style="margin-top:8px;font-size:12px;"></div>
+    </div>
+
+    <!-- EDIT MODE BADGE -->
+    <div id="editModeBadge" style="display:none;background:rgba(74,126,192,0.1);border:1px solid rgba(74,126,192,0.3);border-radius:var(--radius);padding:10px 14px;margin-bottom:24px;display:none;align-items:center;gap:10px;font-size:12px;color:var(--blue);">
+      <span>✏️</span>
+      <span>Editing task: <strong id="editingTaskName"></strong></span>
+      <button onclick="clearEditMode()" style="margin-left:auto;background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:11px;">✕ Cancel edit</button>
+    </div>
+
+    <!-- SECTION 0: EVENT & DEAL TERMS -->
+    <div class="form-section active" id="section0">
+      <div class="section-header">
+        <div class="section-eyebrow">Section 01</div>
+        <div class="section-title">Event & Deal Terms</div>
+        <div class="section-desc">Core event info and partner deal structure. This section is always required.</div>
+      </div>
+
+      <div class="fieldset">
+        <div class="fieldset-header">
+          <span class="fieldset-icon">🎪</span>
+          <span class="fieldset-label">Event Information</span>
+        </div>
+        <div class="fieldset-body">
+          <div class="form-grid">
+            <div class="field">
+              <label class="field-label">Event Name <span class="req">*</span></label>
+              <select id="eventName">
+                <option value="">Select event...</option>
+                <option>PTMF Aspen 2026</option>
+                <option>PTMF Hamptons 2026</option>
+                <option>PTMF St. Tropez 2026</option>
+                <option>PTMF Kansas City 2026</option>
+                <option>PTMF Orlando 2026</option>
+                <option>PTMF West Palm Beach 2026</option>
+                <option>PTMF Singapore 2026</option>
+                <option>PTC Miami</option>
+                <option>PTC Kansas City</option>
+                <option>PTC Orlando</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">Contract Executed?</label>
+              <select id="contractExecuted">
+                <option value="">Select...</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Pending</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">Event Start Date</label>
+              <input type="date" id="eventDateStart" />
+            </div>
+            <div class="field">
+              <label class="field-label">Event End Date</label>
+              <input type="date" id="eventDateEnd" />
+            </div>
+            <div class="field">
+              <label class="field-label">Location / Venue</label>
+              <input type="text" id="venue" placeholder="e.g. Snowmass Village, CO" />
+            </div>
+            <div class="field">
+              <label class="field-label">Partner / Co-Promoter</label>
+              <input type="text" id="partner" placeholder="e.g. TAO Group" />
+            </div>
+            <div class="field">
+              <label class="field-label">Deal Executed By</label>
+              <input type="text" id="dealBy" placeholder="Name" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fieldset">
+        <div class="fieldset-header">
+          <span class="fieldset-icon">🤝</span>
+          <span class="fieldset-label">Deal Structure</span>
+        </div>
+        <div class="fieldset-body">
+          <div class="form-grid">
+            <div class="field">
+              <label class="field-label">Deal Type</label>
+              <select id="dealStructure">
+                <option value="">Select...</option>
+                <option>License</option>
+                <option>Co-Promote</option>
+                <option>Joint Venture</option>
+                <option>Flat Fee Only</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">Settlement Timeline</label>
+              <select id="settlementTimeline">
+                <option value="">Select...</option>
+                <option>Day of Show</option>
+                <option>Net 7</option>
+                <option>Net 14</option>
+                <option>Net 30</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">Who Handles Settlement</label>
+              <select id="settlementAccounting">
+                <option value="">Select...</option>
+                <option>PTC</option>
+                <option>Partner</option>
+                <option>Joint</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">Expense Cap Before Split</label>
+              <div class="money-wrap"><span class="money-symbol">$</span><input type="number" id="expenseCap" placeholder="0.00" /></div>
+            </div>
+            <div class="field">
+              <label class="field-label">Advance Payment Amount</label>
+              <div class="money-wrap"><span class="money-symbol">$</span><input type="number" id="advanceAmount" placeholder="0.00" /></div>
+            </div>
+            <div class="field">
+              <label class="field-label">Advance Due Date</label>
+              <input type="date" id="advanceDue" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PTC REVENUE COMPONENTS -->
+      <div class="fieldset">
+        <div class="fieldset-header">
+          <span class="fieldset-icon">💵</span>
+          <span class="fieldset-label">PTC Revenue Components — Check All That Apply</span>
+        </div>
+        <div class="fieldset-body" style="display:flex;flex-direction:column;gap:20px;">
+
+          <!-- FLAT FEE -->
+          <div>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin-bottom:12px;">
+              <input type="checkbox" id="chkFlatFee" onchange="toggleBlock('flatFeeBlock',this.checked)" style="width:16px;height:16px;accent-color:var(--gold)" />
+              <span style="font-weight:500;font-size:13px;">Flat Fee</span>
+            </label>
+            <div id="flatFeeBlock" style="display:none;padding-left:26px;">
+              <div class="form-grid">
+                <div class="field">
+                  <label class="field-label">Flat Fee Amount</label>
+                  <div class="money-wrap"><span class="money-symbol">$</span><input type="number" id="flatFeeAmount" placeholder="0.00" /></div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Payment Timing</label>
+                  <select id="flatFeeTiming">
+                    <option value="">Select...</option>
+                    <option>At Signing</option>
+                    <option>Day of Show</option>
+                    <option>Net 7</option>
+                    <option>Net 30</option>
+                    <option>Split: 50% at signing / 50% day of show</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="field col-span-2">
+                  <label class="field-label">Notes</label>
+                  <input type="text" id="flatFeeNotes" placeholder="Any conditions on the flat fee..." />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="height:1px;background:var(--border)"></div>
+
+          <!-- % OF SPONSORSHIPS -->
+          <div>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin-bottom:12px;">
+              <input type="checkbox" id="chkSponsorPct" onchange="toggleBlock('sponsorPctBlock',this.checked)" style="width:16px;height:16px;accent-color:var(--gold)" />
+              <span style="font-weight:500;font-size:13px;">% of Sponsorships</span>
+            </label>
+            <div id="sponsorPctBlock" style="display:none;padding-left:26px;">
+              <div class="form-grid">
+                <div class="field">
+                  <label class="field-label">PTC % of Sponsorships</label>
+                  <div class="pct-wrap"><span class="pct-symbol">%</span><input type="number" id="sponsorPct" placeholder="0" /></div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Applied To</label>
+                  <select id="sponsorPctAppliedTo">
+                    <option value="">Select...</option>
+                    <option>All sponsorships sold</option>
+                    <option>PTC-sourced sponsorships only</option>
+                    <option>Net sponsorship revenue</option>
+                    <option>Gross sponsorship revenue</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="field-label">Projected Sponsorship Revenue</label>
+                  <div class="money-wrap"><span class="money-symbol">$</span><input type="number" id="sponsorRevProjected" placeholder="0.00" /></div>
+                </div>
+                <div class="field">
+                  <label class="field-label">PTC Estimated Share</label>
+                  <div class="money-wrap"><span class="money-symbol">$</span><input type="number" id="sponsorPtcShare" placeholder="0.00" /></div>
+                </div>
+                <div class="field col-span-2" style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:14px;">
+                  <label class="field-label" style="color:var(--gold);margin-bottom:10px;">⚠️ Sponsorship Reinvestment / Festival P&L Billing</label>
+                  <div class="form-grid" style="margin-top:0">
+                    <div class="field">
+                      <label class="field-label">Is PTC reinvesting $ into sponsorship?</label>
+                      <select id="sponsorReinvestYN" onchange="toggleBlock('sponsorReinvestBlock',this.value==='Yes')">
+                        <option value="">Select...</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
+                    </div>
+                    <div class="field" id="sponsorReinvestBlock" style="display:none">
+                      <label class="field-label">Amount PTC Is Reinvesting</label>
+                      <div class="money-wrap"><span class="money-symbol">$</span><input type="number" id="sponsorReinvestAmt" placeholder="0.00" /></div>
+                    </div>
+                    <div class="field">
+                      <label class="field-label">Billable back to Festival P&L?</label>
+                      <select id="sponsorBillable">
+                        <option value="">Select...</option>
+                        <option>Yes — PTC gets reimbursed</option>
+                        <option>No — PTC absorbs cost</option>
+                        <option>Partial</option>
+                      </select>
+                    </div>
+                    <div class="field">
+                      <label class="field-label">Reimbursement Amount</label>
+                      <div class="money-wrap"><span class="money-symbol">$</span><input type="number" id="sponsorReimbAmt" placeholder="0.00" /></div>
+                    </div>
+                    <div class="field">
+                      <label class="field-label">Reimbursement Timing</label>
+                      <select id="sponsorReimbTiming">
+                        <option value="">Select...</option>
+                        <option>At Settlement</option>
+                        <option>Net 30</option>
+                        <option>Pre-event</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+                    <div class="field col-span-2">
+                      <label class="field-label">Notes</label>
+                      <input type="text" id="sponsorBillingNotes" placeholder="Which sponsorship deal, any conditions..." />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="height:1px;background:var(--border)"></div>
+
+          <!-- % OF PALM CLUB TABLES -->
+          <div>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin-bottom:12px;">
+              <input type="checkbox" id="chkPalmClub" onchange="toggleBlock('palmClubBlock',this.checked)" style="width:16px;height:16px;accent-color:var(--gold)" />
+              <span style="font-weight:500;font-size:13px;">% of Palm Club Tables</span>
+            </label>
+            <div id="palmClubBlock" style="display:none;padding-left:26px;">
+              <div class="form-grid">
+                <div class="field col-span-2">
+                  <label class="field-label">Revenue Basis</label>
+                  <select id="palmClubBasis">
+                    <option value="">Select...</option>
+                    <option>% of PTC-sold tables only</option>
+                    <option>% of total Palm Club revenue (all tables sold by anyone)</option>
+                    <option>Both — % of PTC-sold + % of total</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="field-label">PTC % on PTC-Sold Tables</label>
+                  <div class="pct-wrap"><span class="pct-symbol">%</span><input type="number" id="palmClubPtcSoldPct" placeholder="0" /></div>
+                </div>
+                <div class="field">
+                  <label class="field-label">PTC % on Total Palm Club Revenue</label>
+                  <div class="pct-wrap"><span class="pct-symbol">%</span><input type="number" id="palmClubTotalPct" placeholder="0" /></div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Projected PTC-Sold Table Revenue</label>
+                  <div class="money-wrap"><span class="money-symbol">$</span><input type="number" id="palmClubPtcSoldProjected" placeholder="0.00" /></div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Projected Total Palm Club Revenue</label>
+                  <div class="money-wrap"><span class="money-symbol">$</span><input type="number" id="palmClubTotalProjected" placeholder="0.00" /></div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Who Operates Palm Club</label>
+                  <select id="palmClubOperator">
+                    <option value="">Select...</option>
+                    <option>PTC</option>
+                    <option>Partner / Festival</option>
+                    <option>Venue</option>
+                    <option>Joint</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="field-label">Who Tracks / Reconciles Sales</label>
+                  <select id="palmClubReconciler">
+                    <option value="">Select...</option>
+                    <option>PTC</option>
+                    <option>Partner</option>
+                    <option>Joint at Settlement</option>
+                  </select>
+                </div>
+                <div class="field col-span-2">
+                  <label class="field-label">Notes</label>
+                  <input type="text" id="palmClubNotes" placeholder="Any conditions, minimums, split details..." />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="height:1px;background:var(--border)"></div>
+
+          <!-- GENERAL REVENUE SHARE -->
+          <div>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin-bottom:12px;">
+              <input type="checkbox" id="chkRevShare" onchange="toggleBlock('revShareBlock',this.checked)" style="width:16px;height:16px;accent-color:var(--gold)" />
+              <span style="font-weight:500;font-size:13px;">General Revenue Share (overall P&L)</span>
+            </label>
+            <div id="revShareBlock" style="display:none;padding-left:26px;">
+              <div class="form-grid">
+                <div class="field">
+                  <label class="field-label">PTC Revenue Share %</label>
+                  <div class="pct-wrap"><span class="pct-symbol">%</span><input type="number" id="ptcSharePct" placeholder="0" /></div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Partner Revenue Share %</label>
+                  <div class="pct-wrap"><span class="pct-symbol">%</span><input type="number" id="partnerSharePct" placeholder="0" /></div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Partner Guarantee to PTC</label>
+                  <div class="money-wrap"><span class="money-symbol">$</span><input type="number" id="partnerGuarantee" placeholder="0.00" /></div>
+                </div>
+                <div class="field col-span-2">
+                  <label class="field-label">Notes</label>
+                  <input type="text" id="revShareNotes" placeholder="What the share applies to, any exclusions..." />
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="fieldset">
+        <div class="fieldset-header">
+          <span class="fieldset-icon">📝</span>
+          <span class="fieldset-label">Additional Terms</span>
+        </div>
+        <div class="fieldset-body">
+          <div class="form-grid">
+            <div class="field col-span-2">
+              <label class="field-label">Performance Bonuses / Escalators</label>
+              <textarea id="bonuses" placeholder="Describe any bonus structures or escalators..."></textarea>
+            </div>
+            <div class="field col-span-2">
+              <label class="field-label">Special Conditions</label>
+              <textarea id="specialConditions" placeholder="Any special terms, exclusions, or conditions..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-nav">
+        <div></div>
+        <button class="btn btn-primary" onclick="goTo(1)">Expenses →</button>
+      </div>
+    </div>
+
+    <!-- SECTION 1: EXPENSES -->
+    <div class="form-section" id="section1">
+      <div class="section-header">
+        <div class="section-eyebrow">Section 02</div>
+        <div class="section-title">Expenses</div>
+        <div class="section-desc">Add each expense line item. Each will create a separate task in ClickUp tagged to this event.</div>
+      </div>
+
+      <div class="repeat-list" id="expenseList"></div>
+      <button class="btn-add" onclick="addExpense()">
+        <span class="btn-add-icon">+</span> Add Expense Line Item
+      </button>
+
+      <div class="section-nav">
+        <button class="btn btn-ghost" onclick="goTo(0)">← Back</button>
+        <button class="btn btn-primary" onclick="goTo(2)">Revenue →</button>
+      </div>
+    </div>
+
+    <!-- SECTION 2: REVENUE -->
+    <div class="form-section" id="section2">
+      <div class="section-header">
+        <div class="section-eyebrow">Section 03</div>
+        <div class="section-title">Revenue Sources</div>
+        <div class="section-desc">Add each revenue stream. Each will create a separate task in ClickUp tagged to this event.</div>
+      </div>
+
+      <div class="repeat-list" id="revenueList"></div>
+      <button class="btn-add" onclick="addRevenue()">
+        <span class="btn-add-icon">+</span> Add Revenue Source
+      </button>
+
+      <div class="section-nav">
+        <button class="btn btn-ghost" onclick="goTo(1)">← Back</button>
+        <button class="btn btn-primary" onclick="goTo(3)">Sales Tax & Notes →</button>
+      </div>
+    </div>
+
+    <!-- SECTION 3: SALES TAX & NOTES -->
+    <div class="form-section" id="section3">
+      <div class="section-header">
+        <div class="section-eyebrow">Section 04</div>
+        <div class="section-title">Sales Tax & Finance Notes</div>
+        <div class="section-desc">Optional. Fill out if there are sales tax obligations or additional finance notes for this event.</div>
+      </div>
+
+      <div class="fieldset">
+        <div class="fieldset-header">
+          <span class="fieldset-icon">🧾</span>
+          <span class="fieldset-label">Sales Tax</span>
+        </div>
+        <div class="fieldset-body">
+          <div class="form-grid">
+            <div class="field">
+              <label class="field-label">Does PTC need to file / remit sales tax?</label>
+              <select id="salesTaxFile">
+                <option value="">Select...</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>TBD</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">State / Jurisdiction</label>
+              <input type="text" id="taxJurisdiction" placeholder="e.g. Colorado" />
+            </div>
+            <div class="field">
+              <label class="field-label">Tax Counsel Notified?</label>
+              <select id="taxCounsel">
+                <option value="">Select...</option>
+                <option>Yes</option>
+                <option>No — Tag Timothy Epstein</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-top:20px">
+            <div class="field-label" style="margin-bottom:12px">Sales Tax by Revenue Stream</div>
+            <table class="tax-table">
+              <thead>
+                <tr>
+                  <th>Revenue Stream</th>
+                  <th>Collected By</th>
+                  <th>Rate %</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody id="taxTableBody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="fieldset">
+        <div class="fieldset-header">
+          <span class="fieldset-icon">📋</span>
+          <span class="fieldset-label">Finance Notes</span>
+        </div>
+        <div class="fieldset-body">
+          <div class="form-grid">
+            <div class="field">
+              <label class="field-label">Insurance Certificate Required?</label>
+              <select id="insurance">
+                <option value="">Select...</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">Insurance Provider</label>
+              <input type="text" id="insuranceProvider" placeholder="Provider name" />
+            </div>
+            <div class="field">
+              <label class="field-label">Currency</label>
+              <select id="currency">
+                <option>USD</option>
+                <option>EUR</option>
+                <option>SGD</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">Finance POC</label>
+              <input type="text" id="financePoc" placeholder="e.g. Lexus" />
+            </div>
+            <div class="field col-span-2">
+              <label class="field-label">Escrow / Holdback Requirements</label>
+              <textarea id="escrow" placeholder="Describe any escrow or holdback terms..."></textarea>
+            </div>
+            <div class="field col-span-2">
+              <label class="field-label">FX Risk Notes</label>
+              <textarea id="fxRisk" placeholder="For international events — currency risk, hedging, etc."></textarea>
+            </div>
+            <div class="field col-span-2">
+              <label class="field-label">Prior Year Settlement Issues</label>
+              <textarea id="priorIssues" placeholder="Anything finance should know from prior year..."></textarea>
+            </div>
+            <div class="field col-span-2">
+              <label class="field-label">Additional Notes for Finance</label>
+              <textarea id="additionalNotes" placeholder="Anything else finance needs to know..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-nav">
+        <button class="btn btn-ghost" onclick="goTo(2)">← Back</button>
+        <button class="btn btn-submit" id="submitBtn" onclick="submitAll()">🚀 Submit to ClickUp</button>
+      </div>
+    </div>
+
+    <!-- SUCCESS SCREEN -->
+    <div class="submit-screen" id="successScreen">
+      <div class="submit-icon">✅</div>
+      <div class="submit-title">Deal Terms Submitted</div>
+      <div class="submit-desc">The following tasks have been created in ClickUp under <strong>Finance DEV → Finance → Festival Deal Terms</strong>.</div>
+      <div class="task-links" id="taskLinks"></div>
+      <div style="margin-top:32px">
+        <button class="btn btn-ghost" onclick="resetForm()">Submit Another Event</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ────────────────────────────────────────────────────────────
+// CONFIG
+// ────────────────────────────────────────────────────────────
+const LIST_ID = '901414905425'; // Finance DEV → Finance → Festival Deal Terms
+let apiKey = '';
+let currentSection = 0;
+const SECTIONS = 4;
+const taxStreams = ['Ticket Sales','VIP / Tables','Bar & Beverage','Merch','Parking','Hotel / Travel Packages','Third Party Resellers'];
+
+// ────────────────────────────────────────────────────────────
+// HELPERS
+// ────────────────────────────────────────────────────────────
+function toggleBlock(id, show) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = show ? 'block' : 'none';
+}
+
+// ────────────────────────────────────────────────────────────
+// INIT
+// ────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const stored = sessionStorage.getItem('ptc_api_key');
+  if (stored) { apiKey = stored; showApiKeyConfirmed(); }
+  buildTaxTable();
+  addExpense();
+  addRevenue();
+});
+
+// ────────────────────────────────────────────────────────────
+// API KEY
+// ────────────────────────────────────────────────────────────
+function saveApiKey() {
+  const val = document.getElementById('apiKeyInput').value.trim();
+  if (!val) { showToast('Please enter your ClickUp API key', 'error'); return; }
+  apiKey = val;
+  sessionStorage.setItem('ptc_api_key', val);
+  showApiKeyConfirmed();
+}
+function showApiKeyConfirmed() {
+  document.getElementById('apiKeyInput').value = '••••••••••••••••';
+  document.getElementById('apiKeyConfirm').innerHTML = '<div class="inline-alert">✓ API key saved for this session</div>';
+}
+
+// ────────────────────────────────────────────────────────────
+// NAV
+// ────────────────────────────────────────────────────────────
+function goTo(i) {
+  document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const s = document.getElementById('section' + i);
+  if (s) { s.classList.add('active'); currentSection = i; }
+  const n = document.getElementById('nav' + i);
+  if (n) n.classList.add('active');
+  updateProgress();
+  window.scrollTo(0, 0);
+}
+function updateProgress() {
+  const pct = ((currentSection + 1) / SECTIONS) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+// ────────────────────────────────────────────────────────────
+// EXPENSE ITEMS
+// ────────────────────────────────────────────────────────────
+let expenseCount = 0;
+function addExpense() {
+  expenseCount++;
+  const id = 'exp_' + expenseCount;
+  const html = `
+    <div class="repeat-item" id="${id}">
+      <div class="repeat-item-header">
+        <span class="repeat-item-label">Expense #${expenseCount}</span>
+        <button class="btn-remove" onclick="removeItem('${id}')">×</button>
+      </div>
+      <div class="form-grid cols-3">
+        <div class="field">
+          <label class="field-label">Category</label>
+          <select class="exp-category">
+            <option value="">Select...</option>
+            <option>Talent</option>
+            <option>Production</option>
+            <option>Venue & Ops</option>
+            <option>Marketing</option>
+            <option>Logistics</option>
+            <option>Legal</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field col-span-2">
+          <label class="field-label">Expense Item <span class="req">*</span></label>
+          <input type="text" class="exp-item" placeholder="e.g. Talent Fee — Headliner" />
+        </div>
+        <div class="field">
+          <label class="field-label">Vendor / Payee</label>
+          <input type="text" class="exp-vendor" placeholder="Vendor name" />
+        </div>
+        <div class="field">
+          <label class="field-label">Rough / Estimated Amount <span style="color:var(--text-dim);font-weight:400;font-size:10px">— optional, update later</span></label>
+          <div class="money-wrap"><span class="money-symbol">$</span><input type="number" class="exp-estimated" placeholder="TBD" /></div>
+        </div>
+        <div class="field">
+          <label class="field-label">PTC Paying?</label>
+          <select class="exp-ptcpaying">
+            <option value="">Select...</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Reimbursable?</label>
+          <select class="exp-reimbursable">
+            <option value="">Select...</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Reimbursed By</label>
+          <select class="exp-reimb-by">
+            <option value="">Select...</option>
+            <option>Partner</option>
+            <option>Venue</option>
+            <option>Sponsor</option>
+            <option>N/A</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Reimbursement Timing</label>
+          <select class="exp-reimb-timing">
+            <option value="">Select...</option>
+            <option>At Settlement</option>
+            <option>Net 30</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Reimbursement Cap</label>
+          <div class="money-wrap"><span class="money-symbol">$</span><input type="number" class="exp-reimb-cap" placeholder="0.00" /></div>
+        </div>
+        <div class="field col-span-2">
+          <label class="field-label">Notes</label>
+          <input type="text" class="exp-notes" placeholder="Any additional notes..." />
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('expenseList').insertAdjacentHTML('beforeend', html);
+}
+
+// ────────────────────────────────────────────────────────────
+// REVENUE ITEMS
+// ────────────────────────────────────────────────────────────
+let revenueCount = 0;
+function addRevenue() {
+  revenueCount++;
+  const id = 'rev_' + revenueCount;
+  const html = `
+    <div class="repeat-item" id="${id}">
+      <div class="repeat-item-header">
+        <span class="repeat-item-label">Revenue Source #${revenueCount}</span>
+        <button class="btn-remove" onclick="removeItem('${id}')">×</button>
+      </div>
+      <div class="form-grid cols-3">
+        <div class="field">
+          <label class="field-label">Revenue Source <span class="req">*</span></label>
+          <select class="rev-source">
+            <option value="">Select...</option>
+            <option>Ticket Sales</option>
+            <option>VIP & Table Sales</option>
+            <option>Sponsorships</option>
+            <option>Bar & Beverage</option>
+            <option>Merch</option>
+            <option>Parking</option>
+            <option>Third Party Resellers</option>
+            <option>Hotel & Travel Packages</option>
+            <option>Partner Revenue Share</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Who Collects</label>
+          <select class="rev-collector">
+            <option value="">Select...</option>
+            <option>PTC</option>
+            <option>Partner</option>
+            <option>Venue</option>
+            <option>Platform</option>
+            <option>Third Party</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Projected Gross Revenue</label>
+          <div class="money-wrap"><span class="money-symbol">$</span><input type="number" class="rev-gross" placeholder="0.00" /></div>
+        </div>
+        <div class="field col-span-2">
+          <label class="field-label">Platform / Partner Fees <span style="color:var(--text-dim);font-weight:400;font-size:10px">— describe fee structure</span></label>
+          <input type="text" class="rev-fees" placeholder="e.g. Frontgate takes 10% + $2 per ticket, partner keeps 30% of net" />
+        </div>
+        <div class="field">
+          <label class="field-label">Sales Tax Collected By</label>
+          <select class="rev-tax-by">
+            <option value="">Select...</option>
+            <option>PTC</option>
+            <option>Partner</option>
+            <option>Venue</option>
+            <option>Platform</option>
+            <option>Operator</option>
+            <option>Reseller</option>
+            <option>N/A</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Sales Tax Rate %</label>
+          <div class="pct-wrap"><span class="pct-symbol">%</span><input type="number" class="rev-tax-rate" placeholder="0" /></div>
+        </div>
+        <div class="field col-span-2">
+          <label class="field-label">Notes</label>
+          <input type="text" class="rev-notes" placeholder="Ticketing platform, contract details, etc." />
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('revenueList').insertAdjacentHTML('beforeend', html);
+}
+
+function removeItem(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+}
+
+// ────────────────────────────────────────────────────────────
+// SALES TAX TABLE
+// ────────────────────────────────────────────────────────────
+function buildTaxTable() {
+  const tbody = document.getElementById('taxTableBody');
+  tbody.innerHTML = '';
+  taxStreams.forEach(stream => {
+    tbody.insertAdjacentHTML('beforeend', `
+      <tr>
+        <td style="color:var(--text-mid);font-size:12px">${stream}</td>
+        <td><select class="tax-collector" data-stream="${stream}">
+          <option value="">—</option>
+          <option>PTC</option><option>Partner</option><option>Venue</option>
+          <option>Platform</option><option>Operator</option><option>Reseller</option><option>N/A</option>
+        </select></td>
+        <td><div class="pct-wrap" style="max-width:80px"><span class="pct-symbol">%</span><input type="number" class="tax-rate" placeholder="0" /></div></td>
+        <td><input type="text" class="tax-notes" placeholder="Notes" /></td>
+      </tr>`);
+  });
+}
+
+// ────────────────────────────────────────────────────────────
+// LOAD & EDIT MODE
+// ────────────────────────────────────────────────────────────
+let editingTaskId = null;
+let editingTaskName = null;
+
+function toggleLoadMode() {
+  const panel = document.getElementById('loadEditPanel');
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+}
+
+async function loadTask() {
+  const taskId = document.getElementById('loadTaskId').value.trim();
+  if (!taskId) { showToast('Enter a task ID', 'error'); return; }
+  if (!apiKey) { showToast('Enter your API key first', 'error'); return; }
+
+  const btn = document.getElementById('loadBtn');
+  const status = document.getElementById('loadStatus');
+  btn.textContent = 'Loading...';
+  btn.disabled = true;
+  status.innerHTML = '';
+
+  try {
+    const resp = await fetch(`https://api.clickup.com/api/v2/task/${taskId}`, {
+      headers: { 'Authorization': apiKey }
+    });
+    if (!resp.ok) throw new Error('Task not found');
+    const task = await resp.json();
+
+    // Parse the description back into fields
+    const desc = task.description || '';
+    const lines = desc.split('\n');
+    const get = (label) => {
+      const line = lines.find(l => l.startsWith(label + ':'));
+      return line ? line.replace(label + ':', '').trim() : '';
+    };
+
+    // Populate Event Info fields from description
+    const eventNameVal = get('EVENT');
+    const eventSel = document.getElementById('eventName');
+    for (let opt of eventSel.options) {
+      if (opt.value === eventNameVal) { eventSel.value = eventNameVal; break; }
+    }
+
+    // Set edit mode
+    editingTaskId = taskId;
+    editingTaskName = task.name;
+    document.getElementById('editingTaskName').textContent = task.name;
+    const badge = document.getElementById('editModeBadge');
+    badge.style.display = 'flex';
+    document.getElementById('loadEditPanel').style.display = 'none';
+
+    status.innerHTML = `<span style="color:var(--green)">✓ Loaded: ${task.name}</span>`;
+    document.getElementById('submitBtn').textContent = '✏️ Update Tasks in ClickUp';
+    showToast(`Loaded: ${task.name}`, 'success');
+
+  } catch(e) {
+    status.innerHTML = `<span style="color:var(--red)">✗ ${e.message} — check the task ID and try again</span>`;
+    showToast('Could not load task: ' + e.message, 'error');
+  }
+
+  btn.textContent = 'Load Task';
+  btn.disabled = false;
+}
+
+function clearEditMode() {
+  editingTaskId = null;
+  editingTaskName = null;
+  document.getElementById('editModeBadge').style.display = 'none';
+  document.getElementById('submitBtn').textContent = '🚀 Submit to ClickUp';
+}
+
+// ────────────────────────────────────────────────────────────
+// UPDATE EXISTING TASK
+// ────────────────────────────────────────────────────────────
+async function updateClickUpTask(taskId, name, description) {
+  const resp = await fetch(`https://api.clickup.com/api/v2/task/${taskId}`, {
+    method: 'PUT',
+    headers: { 'Authorization': apiKey, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, description })
+  });
+  if (!resp.ok) {
+    const err = await resp.json();
+    throw new Error(err.err || 'Update failed');
+  }
+  return await resp.json();
+}
+
+// ────────────────────────────────────────────────────────────
+// CLICKUP API — CREATE
+// ────────────────────────────────────────────────────────────
+async function createClickUpTask(name, description) {
+  const resp = await fetch('https://api.clickup.com/api/v2/list/' + LIST_ID + '/task', {
+    method: 'POST',
+    headers: {
+      'Authorization': apiKey,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, description, status: 'Open' })
+  });
+  if (!resp.ok) {
+    const err = await resp.json();
+    throw new Error(err.err || 'ClickUp API error');
+  }
+  return await resp.json();
+}
+
+// ────────────────────────────────────────────────────────────
+// COLLECT DATA
+// ────────────────────────────────────────────────────────────
+function val(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+function getEventName() { return val('eventName') || 'Unnamed Event'; }
+
+function buildDealTermsDescription() {
+  const ev = getEventName();
+  const lines = [
+    `EVENT: ${ev}`,
+    `Dates: ${val('eventDateStart')} to ${val('eventDateEnd')}`,
+    `Venue: ${val('venue')}`,
+    `Partner: ${val('partner')}`,
+    `Executed By: ${val('dealBy')}`,
+    `Contract Executed: ${val('contractExecuted')}`,
+    ``,
+    `DEAL STRUCTURE`,
+    `Type: ${val('dealStructure')}`,
+    `Settlement Timeline: ${val('settlementTimeline')}`,
+    `Settlement Accounting: ${val('settlementAccounting')}`,
+    `Expense Cap Before Split: $${val('expenseCap')}`,
+    `Advance Amount: $${val('advanceAmount')}`,
+    `Advance Due: ${val('advanceDue')}`,
+    ``,
+    `PTC REVENUE COMPONENTS`,
+  ];
+
+  if (document.getElementById('chkFlatFee').checked) {
+    lines.push(``,`[FLAT FEE]`);
+    lines.push(`Amount: $${val('flatFeeAmount')}`);
+    lines.push(`Payment Timing: ${val('flatFeeTiming')}`);
+    if (val('flatFeeNotes')) lines.push(`Notes: ${val('flatFeeNotes')}`);
+  }
+
+  if (document.getElementById('chkSponsorPct').checked) {
+    lines.push(``,`[% OF SPONSORSHIPS]`);
+    lines.push(`PTC %: ${val('sponsorPct')}%`);
+    lines.push(`Applied To: ${val('sponsorPctAppliedTo')}`);
+    lines.push(`Projected Sponsorship Revenue: $${val('sponsorRevProjected')}`);
+    lines.push(`PTC Estimated Share: $${val('sponsorPtcShare')}`);
+    lines.push(`PTC Reinvesting into Sponsorship: ${val('sponsorReinvestYN')}`);
+    if (val('sponsorReinvestYN') === 'Yes') lines.push(`Reinvestment Amount: $${val('sponsorReinvestAmt')}`);
+    lines.push(`Billable to Festival P&L: ${val('sponsorBillable')}`);
+    lines.push(`Reimbursement Amount: $${val('sponsorReimbAmt')}`);
+    lines.push(`Reimbursement Timing: ${val('sponsorReimbTiming')}`);
+    if (val('sponsorBillingNotes')) lines.push(`Billing Notes: ${val('sponsorBillingNotes')}`);
+  }
+
+  if (document.getElementById('chkPalmClub').checked) {
+    lines.push(``,`[% OF PALM CLUB TABLES]`);
+    lines.push(`Revenue Basis: ${val('palmClubBasis')}`);
+    lines.push(`PTC % on PTC-Sold Tables: ${val('palmClubPtcSoldPct')}%`);
+    lines.push(`PTC % on Total Palm Club Revenue: ${val('palmClubTotalPct')}%`);
+    lines.push(`Projected PTC-Sold Table Revenue: $${val('palmClubPtcSoldProjected')}`);
+    lines.push(`Projected Total Palm Club Revenue: $${val('palmClubTotalProjected')}`);
+    lines.push(`Palm Club Operator: ${val('palmClubOperator')}`);
+    lines.push(`Who Reconciles Sales: ${val('palmClubReconciler')}`);
+    if (val('palmClubNotes')) lines.push(`Notes: ${val('palmClubNotes')}`);
+  }
+
+  if (document.getElementById('chkRevShare').checked) {
+    lines.push(``,`[GENERAL REVENUE SHARE]`);
+    lines.push(`PTC Share: ${val('ptcSharePct')}%`);
+    lines.push(`Partner Share: ${val('partnerSharePct')}%`);
+    lines.push(`Partner Guarantee to PTC: $${val('partnerGuarantee')}`);
+    if (val('revShareNotes')) lines.push(`Notes: ${val('revShareNotes')}`);
+  }
+
+  lines.push(``,`ADDITIONAL TERMS`);
+  lines.push(`Bonuses / Escalators: ${val('bonuses')}`);
+  lines.push(`Special Conditions: ${val('specialConditions')}`);
+
+  return lines.join('\n');
+}
+
+function getExpenses() {
+  const items = document.querySelectorAll('#expenseList .repeat-item');
+  return Array.from(items).map(item => ({
+    category: item.querySelector('.exp-category')?.value || '',
+    item: item.querySelector('.exp-item')?.value || '',
+    vendor: item.querySelector('.exp-vendor')?.value || '',
+    estimated: item.querySelector('.exp-estimated')?.value || '',
+    ptcPaying: item.querySelector('.exp-ptcpaying')?.value || '',
+    reimbursable: item.querySelector('.exp-reimbursable')?.value || '',
+    reimbBy: item.querySelector('.exp-reimb-by')?.value || '',
+    reimbTiming: item.querySelector('.exp-reimb-timing')?.value || '',
+    reimbCap: item.querySelector('.exp-reimb-cap')?.value || '',
+    notes: item.querySelector('.exp-notes')?.value || '',
+  })).filter(e => e.item);
+}
+
+function getRevenue() {
+  const items = document.querySelectorAll('#revenueList .repeat-item');
+  return Array.from(items).map(item => ({
+    source: item.querySelector('.rev-source')?.value || '',
+    collector: item.querySelector('.rev-collector')?.value || '',
+    gross: item.querySelector('.rev-gross')?.value || '',
+    fees: item.querySelector('.rev-fees')?.value || '',
+    taxBy: item.querySelector('.rev-tax-by')?.value || '',
+    taxRate: item.querySelector('.rev-tax-rate')?.value || '',
+    notes: item.querySelector('.rev-notes')?.value || '',
+  })).filter(r => r.source);
+}
+
+function buildSalesTaxDescription() {
+  const ev = getEventName();
+  const rows = document.querySelectorAll('#taxTableBody tr');
+  const taxLines = Array.from(rows).map(row => {
+    const stream = row.cells[0].textContent;
+    const collector = row.querySelector('.tax-collector')?.value || '—';
+    const rate = row.querySelector('.tax-rate')?.value || '—';
+    const notes = row.querySelector('.tax-notes')?.value || '';
+    return `${stream}: Collected by ${collector} | Rate: ${rate}% ${notes ? '| ' + notes : ''}`;
+  }).join('\n');
+
+  return [
+    `EVENT: ${ev}`,
+    ``,
+    `SALES TAX`,
+    `PTC Files / Remits Tax: ${val('salesTaxFile')}`,
+    `Jurisdiction: ${val('taxJurisdiction')}`,
+    `Tax Counsel Notified: ${val('taxCounsel')}`,
+    ``,
+    `BY REVENUE STREAM`,
+    taxLines,
+    ``,
+    `FINANCE NOTES`,
+    `Insurance Required: ${val('insurance')} | Provider: ${val('insuranceProvider')}`,
+    `Currency: ${val('currency')}`,
+    `Finance POC: ${val('financePoc')}`,
+    `Escrow / Holdback: ${val('escrow')}`,
+    `FX Risk: ${val('fxRisk')}`,
+    `Prior Settlement Issues: ${val('priorIssues')}`,
+    `Additional Notes: ${val('additionalNotes')}`,
+  ].join('\n');
+}
+
+// ────────────────────────────────────────────────────────────
+// SUBMIT
+// ────────────────────────────────────────────────────────────
+async function submitAll() {
+  if (!apiKey) {
+    showToast('Please enter your ClickUp API key first', 'error');
+    goTo(0);
+    window.scrollTo(0, 0);
+    return;
+  }
+  const eventName = getEventName();
+  if (!eventName || eventName === 'Unnamed Event') {
+    showToast('Please select an event name first', 'error');
+    goTo(0);
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Submitting...';
+
+  const createdTasks = [];
+  const errors = [];
+
+  // 1. Deal Terms (always)
+  try {
+    showToast(editingTaskId ? 'Updating Deal Terms task...' : 'Creating Deal Terms task...', 'info');
+    let task;
+    if (editingTaskId) {
+      task = await updateClickUpTask(editingTaskId, `${eventName} — Deal Terms`, buildDealTermsDescription());
+    } else {
+      task = await createClickUpTask(`${eventName} — Deal Terms`, buildDealTermsDescription());
+    }
+    createdTasks.push({ name: `${eventName} — Deal Terms`, url: task.url });
+    document.getElementById('status0').classList.add('done');
+  } catch(e) { errors.push('Deal Terms: ' + e.message); }
+
+  // 2. Expense tasks
+  const expenses = getExpenses();
+  for (const exp of expenses) {
+    try {
+      const desc = [
+        `EVENT: ${eventName}`,
+        `Category: ${exp.category}`,
+        `Expense Item: ${exp.item}`,
+        `Vendor / Payee: ${exp.vendor}`,
+        `Estimated Amount: ${exp.estimated ? '$' + exp.estimated : 'TBD'}`,
+        `PTC Paying: ${exp.ptcPaying}`,
+        `Reimbursable: ${exp.reimbursable}`,
+        `Reimbursed By: ${exp.reimbBy}`,
+        `Reimbursement Timing: ${exp.reimbTiming}`,
+        `Reimbursement Cap: $${exp.reimbCap}`,
+        `Notes: ${exp.notes}`,
+      ].join('\n');
+      showToast(`Creating expense: ${exp.item}...`, 'info');
+      const task = await createClickUpTask(`${eventName} — Expense: ${exp.item}`, desc);
+      createdTasks.push({ name: `${eventName} — Expense: ${exp.item}`, url: task.url });
+    } catch(e) { errors.push(`Expense "${exp.item}": ` + e.message); }
+  }
+  if (expenses.length > 0) document.getElementById('status1').classList.add('done');
+
+  // 3. Revenue tasks
+  const revenues = getRevenue();
+  for (const rev of revenues) {
+    try {
+      const desc = [
+        `EVENT: ${eventName}`,
+        `Revenue Source: ${rev.source}`,
+        `Who Collects: ${rev.collector}`,
+        `Projected Gross Revenue: ${rev.gross ? '$' + rev.gross : 'TBD'}`,
+        `Platform / Partner Fees: ${rev.fees || '—'}`,
+        `Sales Tax Collected By: ${rev.taxBy}`,
+        `Sales Tax Rate: ${rev.taxRate}%`,
+        `Notes: ${rev.notes}`,
+      ].join('\n');
+      showToast(`Creating revenue: ${rev.source}...`, 'info');
+      const task = await createClickUpTask(`${eventName} — Revenue: ${rev.source}`, desc);
+      createdTasks.push({ name: `${eventName} — Revenue: ${rev.source}`, url: task.url });
+    } catch(e) { errors.push(`Revenue "${rev.source}": ` + e.message); }
+  }
+  if (revenues.length > 0) document.getElementById('status2').classList.add('done');
+
+  // 4. Sales Tax & Notes (if any field filled)
+  const hasTaxData = val('salesTaxFile') || val('taxJurisdiction') || val('additionalNotes') || val('financePoc');
+  if (hasTaxData) {
+    try {
+      showToast('Creating Sales Tax & Notes task...', 'info');
+      const task = await createClickUpTask(`${eventName} — Sales Tax & Finance Notes`, buildSalesTaxDescription());
+      createdTasks.push({ name: `${eventName} — Sales Tax & Finance Notes`, url: task.url });
+      document.getElementById('status3').classList.add('done');
+    } catch(e) { errors.push('Sales Tax: ' + e.message); }
+  }
+
+  btn.disabled = false;
+  btn.textContent = '🚀 Submit to ClickUp';
+
+  if (errors.length > 0) {
+    errors.forEach(e => showToast(e, 'error'));
+  }
+
+  if (createdTasks.length > 0) {
+    showSuccessScreen(createdTasks);
+  }
+}
+
+function showSuccessScreen(tasks) {
+  document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('successScreen').classList.add('active');
+
+  const linksEl = document.getElementById('taskLinks');
+  linksEl.innerHTML = '';
+  tasks.forEach(t => {
+    const icon = t.name.includes('Deal Terms') ? '🤝' :
+                 t.name.includes('Expense') ? '💸' :
+                 t.name.includes('Revenue') ? '💰' : '🧾';
+    linksEl.insertAdjacentHTML('beforeend', `
+      <a class="task-link" href="${t.url}" target="_blank">
+        <span class="task-link-icon">${icon}</span>
+        <span>${t.name}</span>
+        <span class="task-link-url">Open in ClickUp →</span>
+      </a>`);
+  });
+
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('saveDot').classList.add('saved');
+  document.getElementById('saveText').textContent = 'Submitted';
+  showToast(`${tasks.length} task${tasks.length > 1 ? 's' : ''} created in ClickUp`, 'success');
+}
+
+function resetForm() {
+  location.reload();
+}
+
+// ────────────────────────────────────────────────────────────
+// TOAST
+// ────────────────────────────────────────────────────────────
+function showToast(msg, type = 'info') {
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  const icons = { success: '✅', error: '❌', info: 'ℹ️' };
+  el.innerHTML = `<span>${icons[type]}</span><span>${msg}</span>`;
+  const container = document.getElementById('toastContainer');
+  container.appendChild(el);
+  setTimeout(() => el.remove(), type === 'error' ? 5000 : 2500);
+}
+</script>
+</body>
+</html>
